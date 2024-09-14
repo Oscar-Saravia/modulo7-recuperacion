@@ -2,13 +2,13 @@ import useForm from "../../hooks/useForm";
 import { useSelector, useDispatch } from 'react-redux';
 import {saveFormData} from "../../redux/form/formActions";
 import { motion } from 'framer-motion';
-import ModalInfo from "../../components/ModalInfo";
+import Modal from "../../components/Modal";
 
 import { useState } from "react";
 
 const LoginForm = () => {
     const [values, handleChange] = useForm({ username: '', email: ''});
-    const [showModalInfo, setShowModalInfo] = useState(false);
+    const [showModalA, setShowModalA] = useState(false);
     const form = useSelector(state => state.form);
     const dispatch = useDispatch();
 
@@ -18,12 +18,12 @@ const LoginForm = () => {
         dispatch(saveFormData(values));
     }
 
-    const hideModalInfo = () => {
-        setShowModalInfo(false);
+    const hideModal = () => {
+        setShowModalA(false);
     };
 
     const showModal = () => {
-        setShowModalInfo(true);
+        setShowModalA(true);
     }
 
     return (
@@ -32,10 +32,10 @@ const LoginForm = () => {
             animate={{opacity: 1, y: 0}}
             transition={{duration: 1}}
         >
-            <ModalInfo
-                visible={showModalInfo}
+            <Modal
+                visible={showModalA}
                 message="Bienvenidos al Modulo 8"
-                onClose={hideModalInfo}
+                onClose={hideModal}
             />
             <div className="container">
                 <form onSubmit={handleSubmit}>
@@ -73,7 +73,7 @@ const LoginForm = () => {
                     </div>
                     <div className="button-container">
                         <button type="submit">Submit</button>
-                        <button onClick={showModal}>Mostrar Modal</button>
+                        <button onClick={showModalA}>Mostrar Modal</button>
                     </div>
                 </form>
             </div>
